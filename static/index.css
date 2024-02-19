@@ -1,0 +1,576 @@
+
+/* static/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500,600,700,800,900&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #081b29;
+}
+.wrapper{
+    position: relative;
+    width: 750px;
+    height: 450px;
+    background: transparent;
+    border: 2px solid #0ef;
+    box-shadow: 0 0 25px #0ef;
+
+    overflow: hidden;
+
+}
+.wrapper.active{
+    width: 850px;
+    height: 600px;
+
+}
+
+.wrapper .form-box {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+
+
+.wrapper .form-box.login  {
+    left: 0;
+    padding: 0 60px 0 40px;
+
+}
+
+.wrapper .form-box.login .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition: .7s ease;
+    transition-delay: calc(.1s *var(--j));
+
+}
+
+.wrapper.active .form-box.login .animation {
+    transform: translateX(-120%);
+    opacity: 0;
+    filter: blur(10px);
+    transition-delay: calc(.1s *var(--i));
+}
+
+
+.wrapper .form-box.register  {
+    right: 0;
+    padding: 0 40px 0 60px;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper.active .form-box.register  {
+    right: 7%;
+    pointer-events: auto;
+}
+
+
+.wrapper .form-box.register .animation {
+    transform: translateX(120%);
+    opacity: 0;
+    filter: blur(10px);
+    transition: .7s ease;
+    transition-delay: calc(.1s *var(--j));
+
+
+}
+
+.wrapper.active .form-box.register .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition-delay: calc(.1s *var(--i));
+}
+
+.form-box h2 {
+    font-size: 32px;
+    color: #fff;
+    text-align: center;
+}
+
+.sign-up-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-box .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 25px 0;
+}
+
+.wrapper .form-box.register .input-box {
+    width: 80%;
+    margin-bottom: 20px; 
+}
+
+.wrapper.active .form-box .input-box input {
+    /* width: 50%; */
+    width: 100%;
+    left: 10%;
+    /* left: 0; */
+}
+
+
+
+.input-box input {
+    width:100%;
+    height:100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom:2px solid #fff ;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    padding-right: 23px;
+    transition: .5s;
+
+}
+
+
+
+
+.input-box input:focus,
+.input-box input:valid {
+    border-bottom-color:#0ef;
+    
+}
+.input-box input:focus,
+.input-box input:valid {
+    border-bottom-color:#0ef;
+    
+}
+
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+    color: #0ef;
+}
+
+.input-box i {
+    position: absolute;
+    top: 50%;
+    right: auto;
+    transform: translateY(-50%);
+    font-size:18px;
+    color: #fff;
+    transition: .5s;
+}
+
+.input-box input:focus~i,
+.input-box input:valid~i {
+    color:#0ef;
+    
+}
+
+/* .wrapper .forgot-pass-remember-me {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    justify-content: space-between; */
+    /* opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease; */
+/* } */
+/* .forgot-pass-remember-me {
+    margin-top: 10px;
+    margin-bottom: 10px;
+} */
+
+/* forgot-pass-remember-me field */
+
+.wrapper .forgot-pass-remember-me {
+    /* position: absolute; */
+    bottom: 20px; 
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+}
+
+.wrapper.active .forgot-pass-remember-me {
+    opacity: 1;
+    transition-delay: calc(0.1s * var(--i));
+}
+
+/* This the animation for the forgot-pass-remember-me */
+.wrapper .forgot-pass-remember-me .animation {
+    transform: translateY(0);
+    opacity: 1;
+    transition: 0.7s ease;
+    transition-delay: calc(0.1s * var(--j));
+}
+
+.wrapper.active .forgot-pass-remember-me .animation {
+    transform: translateY(-30px); 
+    opacity: 0;
+    transition-delay: calc(0.1s * var(--i));
+}
+
+
+.forgot-pass-remember-me .forgot-pass {
+    flex: 1;
+    position: absolute;
+    left: 60%;
+    bottom: 1px;
+    padding-left: 23px;
+}
+
+.forgot-pass-remember-me .forgot-pass a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-pass-remember-me .forgot-pass a:hover {
+    text-decoration: underline;
+    color: #0ef;
+}
+
+.forgot-pass-remember-me .remember-me {
+    margin-left: 20px; 
+    position: relative;
+    right: 9%;
+    bottom: 10px;
+}
+
+.forgot-pass-remember-me .remember-me label {
+    color: #fff;
+    transition: color 0.3s ease; 
+}
+
+
+.forgot-pass-remember-me input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.forgot-pass-remember-me .remember-me input[type="checkbox"]:hover + label {
+    color: #0ef; 
+}
+
+.forgot-pass-remember-me label {
+    color: #fff;
+}
+
+/* Footer that contains the button and text in the signup form */
+/* 1. Button on top and text at the bottom */
+/* .footer-section-signup {
+    position: absolute;
+    bottom: 7%;
+    right: 29%;
+} */
+
+.footer-section-signup {
+    position: absolute;
+    bottom: 7%;
+    right: 29%;
+}
+
+/* 2. Text on top and button at the bottom */
+/* .footer-section-signup .btn{
+    position: relative;
+    top: 20px;
+}
+.footer-section-signup .logreg-link {
+    bottom: 90px;
+    position: relative;
+} */
+
+.btn {
+    position: relative;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #0ef;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    z-index: 1;
+    overflow: hidden;
+} 
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    background: linear-gradient(#081b29,#0ef,#081b29,#0ef);
+    z-index: -1;
+    transition: .5s;
+
+}
+.btn:hover:before {
+    top: 0;
+    transition: .5s;
+
+}
+
+
+
+.form-box .logreg-link {
+    font-size: 14.5px;
+    color: #fff;
+    text-align: center;
+    margin: 20px 0 10px ;
+
+}
+
+
+.logreg-link p a {
+    color: #0ef;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.logreg-link p a:hover {
+    text-decoration: underline;
+}
+.wrapper .info-text {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wrapper .info-text.login {
+    right: 0;
+    text-align: right;
+    padding: 0 40px 60px 150px;
+
+}
+
+.wrapper .info-text.login .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition: .7s ease;
+    transition-delay: calc(.1s *var(--j));
+
+}
+
+.wrapper.active .info-text.login .animation {
+    transform: translateX(120%);
+    opacity: 0;
+    filter: blur(10px);
+    transition-delay: calc(.1s *var(--i));
+}
+
+.wrapper .info-text.register {
+    left: 0;
+    text-align: left;
+    padding: 0 150px 60px 40px;
+    pointer-events: none;
+
+}
+
+.wrapper.active .info-text.register{
+    pointer-events: auto;
+
+}
+.wrapper .info-text.register .animation {
+    transform: translateX(-120%);
+    opacity: 0;
+    filter: blur(10px);
+    transition: .7s ease;
+    transition-delay: calc(.1s *var(--j));
+
+
+
+}
+
+.wrapper.active .info-text.register .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition-delay: calc(.1s *var(--i));
+
+
+
+}
+
+
+.info-text h2 {
+    font-size: 36px;
+    color: #fff;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+.wrapper .bg-animate {
+    position: absolute;
+    top: -4px;
+    right: 0;
+    width: 850px;
+    height: 600px;
+    background: linear-gradient(45deg,#081b29,#0ef);
+    border-bottom:3px solid #0ef;
+    transform: rotate(10deg) skewY(40deg);
+    /**/
+    transform-origin: bottom right;
+    transition: 1.5s ease;
+    transition-delay: 1.6s;
+
+
+}
+
+.wrapper.active .bg-animate {
+    width: 1000px;
+    height: 900px;
+    transform: rotate(0) skewY(0);
+    transition-delay: .5s;
+
+}
+
+
+.wrapper .bg-animate2 {
+    position: absolute;
+    top: 100%;
+    left: 250px;
+    width: 850px;
+    height: 700px;
+    background: #081b29;
+    border-top:3px solid #0ef;
+    transform: rotate(0) skewY(0);
+    transform-origin: bottom left;
+    transition: 1.5s ease;
+    transition-delay: .5s;
+
+}
+
+.wrapper.active .bg-animate2 {
+    width: 1000px;
+    height: 900px;
+    transform: rotate(-11deg) skewY(-41deg);
+    transition-delay: 1.2s;
+}
+
+/* MEDIA QUERIES */
+
+
+/*  browser window is 600px or smaller*/
+
+@media only screen and  (max-width: 600px){
+    .wrapper {
+        width: 100%;
+        /* height: auto; */
+    }
+
+    .wrapper.active {
+        width: 100%;
+    }
+
+    .wrapper .form-box {
+        width: 60%;
+        /* padding: 0 20px; */
+    }
+
+    /* forgot-pass-remember-me */
+
+    .forgot-pass-remember-me {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+
+    /* created this to adjust the position the div acc to the form above in media queries */
+    .btn.login-form-btn {
+        position: relative;
+        top: 10px;
+    }
+    .btn.login-form-content {
+        position: relative;
+        top: 7px;
+    }
+
+    /* signup-form */
+
+    .wrapper .form-box.register {
+        padding: 0px 40px 60px 84px;    
+        position: absolute;
+        left: 42%;
+    }
+
+    /* .wrapper .form-box .input-box input {
+        width: 100%;
+        height: 160%;
+    } */
+
+    .sign-up-form {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* footer-form */
+    .footer-section-signup {
+        position: absolute;
+        bottom: 3%;
+        right: 20%;
+    }
+
+    .footer-section-signup .btn {
+        position: absolute;
+        bottom: 35px;
+    }
+
+
+}
+
+/*  browser window from 750px to 601px */
+
+@media only screen and  (max-width:750px) and  (min-width: 601px) {
+    .footer-section-signup {
+        position: absolute;
+        bottom: 7%;
+        right: 19%;
+    }
+}
+    
+
+

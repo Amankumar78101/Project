@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Login</title>
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+  <link rel="stylesheet" href="../static/index.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+  <div class="wrapper">
+    <span class="bg-animate"></span>
+    <span class="bg-animate2"></span>
+    <div class="form-box login">
+      <h2 class="animation" style="--i:0; --j:21;">Login</h2>
+      <form action="/login" method="POST"> <!-- Changed method to POST -->
+
+        <div class="input-box animation " style="--i:1; --j:22;">
+          <input type="text" name="username" required> <!-- Added name attribute -->
+          <label>Username</label>
+          <i class='bx bxs-user'></i>
+        </div>
+
+
+        <div class="input-box animation " style="--i:2; --j:23;">
+          <input type="password" name="password" required> <!-- Added name attribute -->
+          <label>Password</label>
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+
+        <!-- 
+          Forgot Password and Remember Me
+         -->
+        <div class="forgot-pass-remember-me animation" style="--i:3; --j:24;">
+          <div class="forgot-pass">
+            <a href="#" id="forgot-password">Forgot Password?</a>
+          </div>
+          <div class="remember-me">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember me</label>
+          </div>
+        </div>
+        
+        
+        <button type="submit" class="btn animation login-form-btn"style="--i:4; --j:25;">Login</button>
+
+        <div class="logreg-link animation login-form-content" style="--i:5; --j:26;">
+          <p>Don't have an account? <a href="#" 
+            class="register-link">Sign Up</a></p>
+        </div>
+
+      </form>
+    </div>
+    <div class="info-text login">
+      <h2 class="animation" style="--i:0; --j:20;">Welcome to Login page</h2>
+    </div>
+
+    <div class="form-box register">
+      <h2 class="animation" style="--i:17; --j:0;">Sign Up</h2>
+      <form class="sign-up-form" action="/signup" method="POST"> <!-- Changed method to POST -->
+        <div class="input-box animation "
+        style="--i:18; --j:1;">
+          <input type="text" name="name" required> <!-- Added name attribute -->
+          <label>Name</label>
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box animation" style="--i:19; --j:2;">
+          <input type="text" name="surname" required> <!-- Added name attribute -->
+          <label>Surname</label>
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box animation" style="--i:20; --j:3;">
+          <input type="email" name="email" required> <!-- Added name attribute -->
+          <label>Email</label>
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box animation" style="--i:21; --j:4;">
+          <input type="password" name="password" required> <!-- Added name attribute -->
+          <label>Password</label>
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box animation" style="--i:22; --j:5;">
+          <input type="password" name="confirm_password" required> <!-- Added name attribute -->
+          <label>Confirm Password</label>
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box animation" style="--i:23;--j:6;">
+          <input type="number" name="mobile_number" required> <!-- Added name attribute -->
+          <label>Mobile number</label>
+          <i class='bx bx-mobile-alt'></i>
+        </div>
+
+        <div class="footer-section-signup">
+          <button type="submit" class="btn animation" style="--i:24; --j:7;">Sign Up</button>
+        <div class="logreg-link animation"style="--i:25; --j:8;">
+          <p>Already have an account? <a href="#" 
+            class="login-link">Login</a></p>
+        </div>
+        </div>
+      </form>
+    </div>
+    <div class="info-text register">
+      <h2 class="animation" style="--i:17; --j:0;">
+        Welcome to Sign Up page</h2>
+    </div>
+  </div>
+
+  <!-- <script src="{{ url_for('static', filename='script.js') }}"></script> -->
+  <script src="../static/script.js"></script>
+</body>
+
+</html>
