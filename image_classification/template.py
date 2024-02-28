@@ -10,10 +10,28 @@ list_of_files = [
    ".github/workflows/.gitkeep",
    f"src/{package_name}/__init__.py", 
    f"src/{package_name}/components/__init__.py", 
+   f"src/{package_name}/components/data_ingestion.py",
+   f"src/{package_name}/components/evaluation.py",
+   f"src/{package_name}/components/prepare_base_model.py",
+   f"src/{package_name}/components/prepare_callback.py",
+   f"src/{package_name}/components/training.py",
+
+
    f"src/{package_name}/utils/__init__.py", 
+   f"src/{package_name}/utils/utils.py", 
+
    f"src/{package_name}/config/__init__.py", 
+   f"src/{package_name}/config/configuration.py", 
+
    f"src/{package_name}/pipeline/__init__.py", 
+   f"src/{package_name}/pipeline/data_ingestion_pipeline.py", 
+   f"src/{package_name}/pipeline/evaluation_pipeline.py", 
+   f"src/{package_name}/pipeline/prepare_base_model_pipeline.py", 
+   f"src/{package_name}/pipeline/prepare_callback_pipeline.py", 
+   f"src/{package_name}/pipeline/training_pipeline.py", 
    f"src/{package_name}/entity/__init__.py", 
+   f"src/{package_name}/entity/config_entity.py", 
+
    f"src/{package_name}/constants/__init__.py",
    "tests/__init__.py",
    "tests/unit/__init__.py",
