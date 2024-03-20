@@ -1,0 +1,13 @@
+
+artifacts_root: artifacts
+
+
+data_ingestion:
+  saved_images: artifacts/data_ingestion/saved_images
+  train_dir: artifacts/data_ingestion/train
+  test_dir: artifacts/data_ingestion/test
+
+
+prepare_base_model:
+  root_dir_pre_model: artifacts/prepare_base_model
+  updated_model: artifacts/prepare_base_model/base_model_updated.h5

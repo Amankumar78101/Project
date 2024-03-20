@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camera</title>
     
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+
     <!-- Include your JavaScript file -->
     <script src="static/script.js"></script>
 </head>
@@ -17,11 +19,11 @@
     <input type="text" id="folderInput" placeholder="Enter folder name">
     <button id="captureBtn">Capture Image</button>
     <form id="form">
-        <input type="hidden" id="image_data" name="image">
+        <input type="hidden" id="image_data" name="image_data">
         <input type="hidden" id="folder" name="folder">
         <input type="hidden" id="remove_folder" name="remove_folder">
     </form>
-    
+        
     <button id="removeFolderBtn">Remove Folder</button>
     <input type="text" id="removeFolderInput" placeholder="Enter folder to remove">
 

@@ -1,0 +1,107 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2; /* Light gray background color */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* White background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    animation: fadeIn 0.5s ease-in-out; /* Fade in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#video {
+    display: block;
+    margin: 0 auto 20px;
+    border: 2px solid #ccc; /* Gray border */
+    border-radius: 5px; /* Rounded corners */
+    animation: zoomIn 0.5s ease-in-out; /* Zoom in animation */
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.button-container {
+    text-align: center;
+    margin-bottom: 20px; /* Add some space below the button container */
+    animation: slideInUp 0.5s ease-in-out; /* Slide in from bottom animation */
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+input[type="text"], button, #removeFolderInput {
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    width: 200px;
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+#removeFolderInput {
+    padding: 8px;
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+#imageContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#imageContainer img {
+    margin: 5px;
+    border-radius: 5px; /* Rounded corners for images */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}

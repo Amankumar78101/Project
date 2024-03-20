@@ -1,3 +1,4 @@
+
 import os
 import sys
 import logging
@@ -12,6 +13,7 @@ LOG_FILE = current_time.strftime('%d_%H_%M_%S') + '.log'
 
 log_filepath = os.path.join(log_dir_name, log_dir, LOG_FILE)
 
+# Create log directory if it doesn't exist
 os.makedirs(os.path.join(log_dir_name, log_dir), exist_ok=True)
 
 logging.basicConfig(level=logging.INFO,

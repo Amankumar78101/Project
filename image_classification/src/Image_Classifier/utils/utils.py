@@ -7,7 +7,6 @@ from box import ConfigBox
 from pathlib import Path
 from typing import Any
 from Image_Classifier import logger
-import tensorflow as tf
 
 
 @ensure_annotations

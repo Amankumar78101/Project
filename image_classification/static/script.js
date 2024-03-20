@@ -1,6 +1,6 @@
+
 let cameraStream = null; // to store the camera stream
 let captureCount = 0; // to keep track of captured images count
-
 function captureImage() {
     var video = document.getElementById('video');
     var canvas = document.createElement('canvas');
@@ -9,7 +9,7 @@ function captureImage() {
     var ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     var dataURL = canvas.toDataURL('image/png');
-    document.getElementById('image_data').value = dataURL;
+    document.getElementById('image_data').value = dataURL; // Ensure the field name is 'image_data'
     document.getElementById('folder').value = document.getElementById('folderInput').value;
     // Submit the form asynchronously using AJAX
     var xhr = new XMLHttpRequest();
@@ -32,6 +32,7 @@ function captureImage() {
         captureCount = 0; // Reset capture count after capturing 10 images
     }
 }
+
 
 function updateImageContainer(imageURL) {
     // Create a new image element and append it to the image container

@@ -1,69 +1,87 @@
-src\Image_Classifier\components\data_ingestion.py
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 import base64
 import os
 import shutil
 import threading
 import uuid
 import time
+import random
+import urllib.request as request
+from Image_Classifier import logger  # Import logger
+from Image_Classifier.entity.config_entity import DataIngestionConfig
+from pathlib import Path
+
 
 class ImageHandler:
-    def __init__(self):
+    def __init__(self, config: DataIngestionConfig):
+        self.config = config
         self.captureCount = 0
 
     def remove_folder(self, folder_path):
-        # Function to remove the folder after 10 minutes
         def remove():
-            print(f"Waiting for 10 minutes before removing the folder '{folder_path}'...")
-            # Wait for 10 minutes
+            logger.info(f"Waiting for 10 minutes before removing the folder '{folder_path}'...")
             time.sleep(600)
-            # Check if the folder exists before trying to remove it
             if os.path.exists(folder_path):
                 shutil.rmtree(folder_path)
-                print(f"Folder '{folder_path}' removed successfully.")
+                logger.info(f"Folder '{folder_path}' removed successfully.")
             else:
-                print(f"The folder '{folder_path}' does not exist.")
+                logger.warning(f"The folder '{folder_path}' does not exist.")
         return remove
 
-    def process_request(self):
-        if request.method == 'POST':
-            image_data = request.form['image']
-            folder_name = request.form['folder'].strip()
-            remove_folder_name = request.form.get('remove_folder')
+    def process_request(self, image_data,folder_name,remove_folder_name):
+        _, encoded_data = image_data.split(',', 1)
+        decoded_image = base64.b64decode(encoded_data)
 
-            _, encoded_data = image_data.split(',', 1)
-            decoded_image = base64.b64decode(encoded_data)
+        os.makedirs(os.path.join(self.config.saved_images,folder_name), exist_ok=True)
+        image_filename = str(uuid.uuid4()) + '.png'
+        image_path = os.path.join(self.config.saved_images,folder_name, image_filename)
 
-            saved_images = 'artifacts/data_ingestion/saved_images'
+        with open(image_path, 'wb') as f:
+            f.write(decoded_image)
 
-            # Create the directory if it doesn't exist
-            os.makedirs(os.path.join(saved_images, folder_name), exist_ok=True)
-            image_filename = str(uuid.uuid4()) + '.png'
-            image_path = os.path.join(saved_images, folder_name, image_filename)
+        self.captureCount += 1
 
-            with open(image_path, 'wb') as f:
-                f.write(decoded_image)
+        if remove_folder_name:
+            folder_path = os.path.join(self.config.saved_images,remove_folder_name)
+            if os.path.exists(folder_path):
+                remove_thread = threading.Thread(target=self.remove_folder(folder_path))
+                remove_thread.start()
+            else:
+                logger.warning(f"The folder '{remove_folder_name}' does not exist.")
 
-            self.captureCount += 1
+        images = [os.path.join(self.config.saved_images,folder_name, image) for image in os.listdir(os.path.join(self.config.saved_images,folder_name))]
+        logger.info("Image processed successfully")
+        return images
 
-            if remove_folder_name:
-                folder_path = os.path.join(saved_images, remove_folder_name)
-                if os.path.exists(folder_path):
-                    shutil.rmtree(folder_path)
-                else:
-                    print(f"The folder '{remove_folder_name}' does not exist.")
+    def split_train_test(self):
+        os.makedirs(self.config.train_dir, exist_ok=True)
+        os.makedirs(self.config.test_dir, exist_ok=True)
 
-            # Schedule folder removal if a new folder is created
-            if not remove_folder_name:
-                folder_path = os.path.join(saved_images, folder_name)
-                threading.Thread(target=self.remove_folder(folder_path)).start()
+        for class_folder in os.listdir(self.config.saved_images):
+            class_path = os.path.join(self.config.saved_images, class_folder)
+            if os.path.isdir(class_path):
+                train_class_dir = os.path.join(self.config.train_dir, class_folder)
+                test_class_dir = os.path.join(self.config.test_dir, class_folder)
+                os.makedirs(train_class_dir, exist_ok=True)
+                os.makedirs(test_class_dir, exist_ok=True)
 
-            # Get all the image URLs in the folder
-            images = [os.path.join(saved_images, folder_name, image) for image in os.listdir(os.path.join(saved_images, folder_name))]
+                images = os.listdir(class_path)
+                random.shuffle(images)
 
-            # Pass the list of image URLs to the template
-            return render_template('index.html', images=images)
+                num_test_images = int(self.config.test_ratio * len(images))
+                test_images = images[:num_test_images]
+                train_images = images[num_test_images:]
 
-        return render_template('index.html', images=[])
+                for image in train_images:
+                    src = os.path.join(class_path, image)
+                    dest = os.path.join(train_class_dir, image)
+                    shutil.move(src, dest)
 
+                for image in test_images:
+                    src = os.path.join(class_path, image)
+                    dest = os.path.join(test_class_dir, image)
+                    shutil.move(src, dest)
+
+                shutil.rmtree(class_path)
+        logger.info("Data split into train and test sets")
