@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Configuration</title>
+    <link rel="stylesheet" href="static/css/Prepare_model.css">
+</head>
+<body>
+
+<h2>Model Configuration</h2>
+
+<form id="modelForm" action="/submit_configuration" method="post">
+  <label for="model_name">Model Name:</label><br>
+  <input type="text" id="model_name" name="model_name" value="VGG16" required><br>
+
+  <label for="freeze_all">Freeze All Layers:</label><br>
+  <select id="freeze_all" name="freeze_all">
+    <option value="True">True</option>
+    <option value="False">False</option>
+  </select><br>
+
+  <label for="freeze_till">Freeze Till Layer:</label><br>
+  <input type="text" id="freeze_till" name="freeze_till" value="None"><br>
+
+  <label for="image_size">Image Size:</label><br>
+  <input type="text" id="image_size" name="image_size" value="[224, 224, 3]" required><br>
+
+  <label for="include_top">Include Top Layers:</label><br>
+  <select id="include_top" name="include_top">
+    <option value="True">True</option>
+    <option value="False">False</option>
+  </select><br>
+
+  <label for="weights">Weights:</label><br>
+  <input type="text" id="weights" name="weights" value="imagenet"><br>
+
+  <label for="neural">Number of Neurons:</label><br>
+  <input type="number" id="neural" name="neural" value="2" min="1" required><br>
+
+  <label for="epochs">Epochs:</label><br>
+  <input type="number" id="epochs" name="epochs" value="1" min="1" required><br>
+
+  <label for="loss">Loss Function:</label><br>
+  <input type="text" id="loss" name="loss" value="CategoricalCrossentropy" required><br>
+
+  <label for="optimizer">Optimizer:</label><br>
+  <input type="text" id="optimizer" name="optimizer" value="SGD" required><br>
+
+  <label for="learning_rate">Learning Rate:</label><br>
+  <input type="number" id="learning_rate" name="learning_rate" value="0.01" step="0.01" required><br>
+
+  <label for="augmentation">Data Augmentation:</label><br>
+  <select id="augmentation" name="augmentation">
+    <option value="True">True</option>
+    <option value="False">False</option>
+  </select><br>
+
+  <label for="batch_size">Batch Size:</label><br>
+  <input type="number" id="batch_size" name="batch_size" value="128" min="1" required><br><br>
+
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+    document.getElementById('freeze_all').addEventListener('change', function() {
+        var freezeAllValue = this.value;
+        document.getElementById('freeze_till').disabled = (freezeAllValue === "True");
+    });
+
+    document.getElementById('include_top').addEventListener('change', function() {
+        var includeTopValue = this.value;
+        document.getElementById('neural').disabled = (includeTopValue === "True");
+    });
+</script>
+
+</body>
+</html>

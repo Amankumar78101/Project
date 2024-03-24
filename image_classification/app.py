@@ -24,10 +24,39 @@ def index():
             return jsonify(images=image_urls)
         else:
             return jsonify(error='Missing form data'), 400
-    
-    # This line should be outside of the if block
-    
+            
     return render_template('index.html')
+
+
+@app.route('/submit_configuration', methods=['GET', 'POST'])
+def submit_configuration():
+    if request.method == 'POST':
+        try:
+            model_name = request.form['model_name']
+            freeze_all = request.form.get('freeze_all')
+            freeze_till = request.form['freeze_till']
+            image_size = [int(x) for x in request.form['image_size'].strip('[]').split(',')]
+            include_top = request.form.get('include_top')
+            weights = request.form['weights']
+            neural = int(request.form.get('neural', 2))
+            epochs = int(request.form.get('epochs', 1))
+            loss = request.form['loss']
+            optimizer = request.form['optimizer']
+            learning_rate = float(request.form.get('learning_rate', 0.01))
+            augmentation = bool(request.form.get('augmentation'))
+            batch_size = int(request.form.get('batch_size', 128))
+            
+            # Process the configuration parameters...
+            
+            return jsonify(success=True)
+        except Exception as e:
+            logger.exception("Failed to process configuration: %s", e)
+            return jsonify(error='Failed to process configuration: %s' % e), 500
+    return render_template('Prepare_model_params.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+

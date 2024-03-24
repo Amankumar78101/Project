@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,11 +28,16 @@
     <button id="removeFolderBtn">Remove Folder</button>
     <input type="text" id="removeFolderInput" placeholder="Enter folder to remove">
 
+    <a href="/submit_configuration">Train the model</a>
+
+
+
     <!-- Display all the images -->
     <div id="imageContainer">
         {% for image in images %}
             <img src="{{ image }}" width="200" height="150">
         {% endfor %}
     </div>
+    
 </body>
 </html>
